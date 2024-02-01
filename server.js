@@ -1,6 +1,6 @@
 let http = require(`http`)
 let util = require('./modules/utils')
-let en = require('./lang/en/en.js');
+// let en = require('./lang/en/en.js');
 let url = require(`url`)
 
 const port = process.env.PORT || 3000;
