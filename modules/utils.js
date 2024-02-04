@@ -1,3 +1,3 @@
-exports.date = () => {
+exports.getDate = () => {
     return Date()
 }
