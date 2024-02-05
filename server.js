@@ -53,8 +53,6 @@ class Writer{
         fs.appendFile(this.fileName + ".txt", content + "\n", (err) => {
             if (err) {
                 console.log('creating File');
-                response.writeHead(404, res.writeHead(404, {'Content-Type': 'text/html'}));
-                return response.end("Created and appended" + content +  "to " + this.fileName);
             }else{
                 console.log(content + ' appended to file successfully.');
             }
