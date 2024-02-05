@@ -9,19 +9,18 @@ const {startingParaTag} =  require('./lang/en/en');
 const {message} =  require('./lang/en/en');
 const {closingParaTag} =  require('./lang/en/en');
 
-//Part Bafter creating a server listening on specified port gets the url and takes the name information and outputs it to the client in a message
-http.createServer((req, res) => {
-    let queryParam = url.parse(req.url, true)
-    const name = queryParam.query["name"]
-    const messageFilled = message.replace("%1", name)
+// http.createServer((req, res) => {
+//     let queryParam = url.parse(req.url, true)
+//     const name = queryParam.query["name"]
+//     const messageFilled = message.replace("%1", name)
 
-    res.writeHead(200, {"Content-Type": "text/html"})
-    res.end(startingParaTag + messageFilled  + util.getDate() + closingParaTag)
-}).listen(port)
+//     res.writeHead(200, {"Content-Type": "text/html"})
+//     res.end(startingParaTag + messageFilled  + util.getDate() + closingParaTag)
+// }).listen(port)
 
-//Bonus Part C Below:
+
 const fs = require(`fs`);
-const port2 = process.env.PORT || 3000;
+
 
 class Reader{
     constructor(filename){
@@ -67,14 +66,23 @@ class Writer{
 http.createServer((req, res) => {
     let queryParam = url.parse(req.url, true)
     const filename = "file"
+    //Bonus Part C Below:
     if (req.url.includes("readFile")){
         let reader = new Reader(filename);
         reader.read_file_content(res);
-        
+    //Bonus Part C Below: 
     }else if(req.url.includes("writeFile")){
         let writer = new Writer(filename);
         const text = queryParam.query["text"]
         writer.write_file_content(text);
         res.end()
+    }else{
+        //Part B after creating a server listening on specified port gets the url and takes the name information and outputs it to the client in a message
+
+        const name = queryParam.query["name"]
+        const messageFilled = message.replace("%1", name)
+
+        res.writeHead(200, {"Content-Type": "text/html"})
+        res.end(startingParaTag + messageFilled  + util.getDate() + closingParaTag)
     }
-}).listen(port2)
+}).listen(port)
