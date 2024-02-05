@@ -53,6 +53,13 @@ class Writer{
         fs.appendFile(this.fileName + ".txt", content + "\n", (err) => {
             if (err) {
                 console.log('creating File');
+                fs.writeFile(this.fileName + ".txt", content + "\n", (err) => {
+                    if (err) {
+                        console.error('Error creating file:', err);
+                    } else {
+                        console.log('File created and content appended successfully.');
+                    }
+                });
             }else{
                 console.log(content + ' appended to file successfully.');
             }
