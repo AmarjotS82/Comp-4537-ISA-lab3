@@ -1,27 +1,8 @@
-let http = require(`http`)
-let util = require('./modules/utils')
-let url = require(`url`)
-
-const port = process.env.PORT || 3000;
-
-//got syntax from chatGPT didn't know how to export variables from one js file to another
-const {startingParaTag} =  require('./lang/en/en');
-const {message} =  require('./lang/en/en');
-const {closingParaTag} =  require('./lang/en/en');
-
-//Part Bafter creating a server listening on specified port gets the url and takes the name information and outputs it to the client in a message
-http.createServer((req, res) => {
-    let queryParam = url.parse(req.url, true)
-    const name = queryParam.query["name"]
-    const messageFilled = message.replace("%1", name)
-
-    res.writeHead(200, {"Content-Type": "text/html"})
-    res.end(startingParaTag + messageFilled  + util.getDate() + closingParaTag)
-}).listen(port)
-
 //Bonus Part C Below:
+let http = require(`http`)
+let url = require(`url`)
 const fs = require(`fs`);
-const port2 = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 class Reader{
     constructor(filename){
@@ -77,4 +58,4 @@ http.createServer((req, res) => {
         writer.write_file_content(text);
         res.end()
     }
-}).listen(port2)
+}).listen(port)
