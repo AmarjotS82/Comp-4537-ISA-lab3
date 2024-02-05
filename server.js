@@ -70,7 +70,7 @@ class Writer{
 
 http.createServer((req, res) => {
     let queryParam = url.parse(req.url, true)
-    const filename = "file"
+    const filename = ".file"
     //Bonus Part C Below:
     if (req.url.includes("readFile")){
         let reader = new Reader(filename);
